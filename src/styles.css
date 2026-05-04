@@ -31,3 +31,11 @@ body{
     position: absolute;
     /* transition: top 0.1s; */
 }
+.dummy{
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    background-color: green;
+    top: 250px;
+    /* left: 70px; */
+}
