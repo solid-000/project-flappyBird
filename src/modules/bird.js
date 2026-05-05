@@ -4,36 +4,36 @@ const planeX = document.querySelector(".plane-x");
 const ground = document.querySelector(".ground");
 // const dummy = document.querySelector(".dummy");
 
-let velocity = 0;
+let velocityY = 0;
 let pos = 0;
-let gravity = -1000;
+let gravity;
 
 function startGravity() {
   gravity = setInterval(() => {
-    velocity += 0.6;
+    velocityY += 0.6;
   }, 25);
 }
 function stopGravity() {
-  velocity = 0;
+  velocityY = 0;
   clearInterval(gravity);
 }
 
-const moveBird = setInterval(() => {
+const moveBirdDown = setInterval(() => {
   onGround();
   pos = parseInt(window.getComputedStyle(bird).top);
   if (pos <= 0) {
     pos = 0;
   }
-  pos += velocity;
+  pos += velocityY;
   bird.style.top = `${pos}px`;
 }, 25);
 
-planeX.addEventListener("click", () => {
+let click = planeX.addEventListener("click", () => {
   flap();
 });
 
 function flap() {
-  velocity = -13;
+  velocityY = -12;
 }
 
 function isColliding(div1, div2) {
@@ -54,4 +54,5 @@ function onGround() {
   }
 }
 
+startGravity();
 export { startGravity };

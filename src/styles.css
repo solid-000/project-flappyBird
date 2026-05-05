@@ -11,6 +11,7 @@ body{
 .plane-x{
     width: 100vw;
     height: 90%;
+    position: relative;
 }
 .ground{
     width: 100vw;
@@ -21,8 +22,30 @@ body{
     width: 50px;
     height: 100%;
     margin-left: 20%;
-    position: relative;
+    position: absolute;
     overflow: none;
+}
+.pipe-column{
+    height: 100%;
+    width: 75px;
+    margin-left: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 230px;
+    background-color: skyblue;
+    outline: none;
+}
+.pipe-top, .pipe-bottom{
+    background-color: orange;
+    width: 100%;
+    height: 50px;
+}
+.pipe-top{
+    height: 50%;
+}
+.pipe-bottom{
+    flex: auto;
 }
 .bird{
     width: 100%;
