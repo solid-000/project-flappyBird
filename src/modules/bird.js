@@ -55,4 +55,4 @@ function onGround() {
 }
 
 startGravity();
-export { startGravity };
+export { startGravity, bird, isColliding };
