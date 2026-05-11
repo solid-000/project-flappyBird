@@ -1,9 +1,8 @@
-import { bird, isColliding } from "./bird";
-import { scoreUp } from "..";
+import { bird } from "./bird";
+import { isColliding, scoreUp, disableClick } from "./common";
 
 const planeX = document.querySelector(".plane-x");
 const planeY = document.querySelector(".plane-y");
-const pipeColumn = document.querySelector(".pipe-column");
 const wrapper = document.querySelector(".game-box");
 let velocityX = 0;
 
@@ -44,7 +43,7 @@ function Pipe() {
       clearInterval(moveColumn);
     }
 
-    //    Triggers makePipe() once the column has scrolled far enough.
+    //Triggers makePipe() once the column has scrolled far enough.
     if (gapTrigger === 0) {
       if (wrapperWidth - pos >= 300) {
         makePipe();
@@ -52,12 +51,18 @@ function Pipe() {
       }
     }
 
-    // Triggers scoreUp() once the bird has passed the column.
+    //Triggers scoreUp() once the bird has passed the column.
     if (scoreTrigger === 0) {
       if (arePipesLeftOfPlaneY(column, planeY)) {
         scoreUp();
         scoreTrigger = 1;
       }
+    }
+
+    //Check Pipe and Bird Collision
+    if (birdPipeCollision(bird, pipeTop, pipeBottom)) {
+      disableClick();
+      stopMovement();
     }
   }, 25);
 
@@ -76,7 +81,7 @@ function birdPipeCollision(b, pTop, pBot) {
 function arePipesLeftOfPlaneY(pipes, plane) {
   let rect1 = pipes.getBoundingClientRect();
   let rect2 = plane.getBoundingClientRect();
-  const offset = rect2.width;
+  const offset = rect2.width + rect1.width;
 
   return !(
     rect1.bottom < rect2.top ||

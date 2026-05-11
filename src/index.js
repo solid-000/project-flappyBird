@@ -1,22 +1,22 @@
 "use strict";
 import "./styles.css";
-import { startGravity, moveBirdDown } from "./modules/bird";
+import { startGravity, moveBird, flap } from "./modules/bird";
 import { startMovement } from "./modules/pipes";
+import { clickEnabled } from "./modules/common";
 
 let gameInterval;
-let score = 0;
 
-function scoreUp() {
-  score++;
-}
+document.querySelector("body").addEventListener("click", () => {
+  if (clickEnabled) {
+    flap();
+  }
+});
 
 function startGameLoop() {
   gameInterval = setInterval(() => {
-    moveBirdDown();
+    moveBird();
   }, 25);
 }
 
 startGameLoop();
 startMovement();
-
-export { scoreUp };
