@@ -1,6 +1,14 @@
 "use strict";
 import "./styles.css";
-import { startGravity } from "./modules/bird";
+import { startGravity, moveBirdDown } from "./modules/bird";
 import { startMovement } from "./modules/pipes";
 
-// startGravity();
+let gameInterval;
+
+function startGameLoop() {
+  gameInterval = setInterval(() => {
+    moveBirdDown();
+  }, 25);
+}
+
+startGameLoop();

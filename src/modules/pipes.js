@@ -12,13 +12,10 @@ function stopMovement() {
   velocityX = 0;
 }
 
-// const movePipesLeft = setInterval(() => {
-//   let pos = parseInt(window.getComputedStyle(pipeColumn).marginLeft);
-//   pos -= velocityX;
-//   pipeColumn.style.marginLeft = `${pos}px`;
-// }, 25);
-
 function Pipe() {
+  let triggered = 0;
+  let gapInterval;
+
   const column = document.createElement("div");
   column.classList.add("pipe-column");
   const pipeTop = document.createElement("div");
@@ -28,6 +25,7 @@ function Pipe() {
   pipeTop.style.height = `${Math.floor(Math.random() * 81) + 10}%`;
   column.append(pipeTop, pipeBottom);
   column.style.left = `${screen.width}px`;
+
   const moveColumnLeft = setInterval(() => {
     birdPipeCollision(bird, pipeTop, pipeBottom);
     let pos = parseInt(window.getComputedStyle(column).left);
@@ -37,23 +35,32 @@ function Pipe() {
       column.remove();
       clearInterval(moveColumnLeft);
     }
+
+    // Triggers makePipe() once the column has scrolled far enough, then clears itself.
+    gapInterval = setInterval(() => {
+      if (triggered == 0) {
+        let pos = parseInt(window.getComputedStyle(column).left);
+        if (screen.width - pos >= 300) {
+          triggered = 1;
+          makePipe();
+        }
+      } else {
+        clearInterval(gapInterval);
+      }
+    }, 1);
   }, 25);
+
   return column;
 }
 
-function startPipeFactory() {
-  pipeInterval = setInterval(() => {
-    const newPipe = Pipe();
-    planeX.append(newPipe);
-  }, 3000);
-}
-function stopPipeFactory() {
-  clearInterval(pipeInterval);
+function makePipe() {
+  const newPipe = Pipe();
+  planeX.append(newPipe);
 }
 
 function birdPipeCollision(b, pTop, pBot) {
   //   console.log(isColliding(b, pTop) || isColliding(b, pBot));
 }
 
-startPipeFactory();
+makePipe();
 export { startMovement };

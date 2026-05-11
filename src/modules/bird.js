@@ -18,7 +18,7 @@ function stopGravity() {
   clearInterval(gravity);
 }
 
-const moveBirdDown = setInterval(() => {
+function moveBirdDown() {
   onGround();
   pos = parseInt(window.getComputedStyle(bird).top);
   if (pos <= 0) {
@@ -26,7 +26,7 @@ const moveBirdDown = setInterval(() => {
   }
   pos += velocityY;
   bird.style.top = `${pos}px`;
-}, 25);
+}
 
 let click = planeX.addEventListener("click", () => {
   flap();
@@ -55,4 +55,4 @@ function onGround() {
 }
 
 startGravity();
-export { startGravity, bird, isColliding };
+export { startGravity, bird, isColliding, moveBirdDown };
