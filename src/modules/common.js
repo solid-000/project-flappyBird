@@ -1,8 +1,11 @@
+const scoreBoard = document.querySelector(".score-board");
+
 //Score functions
 let score = 0;
 function scoreUp() {
   score++;
-  console.log(score);
+  scoreBoard.textContent = score;
+  scoreBoard.style.top = "20px";
 }
 
 //Collision functions

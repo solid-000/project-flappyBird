@@ -1,4 +1,5 @@
-import { isColliding } from "./common";
+import { isColliding, disableClick } from "./common";
+import { stopMovement } from "./pipes";
 
 const bird = document.querySelector(".bird");
 const planeY = document.querySelector(".plane-y");
@@ -36,6 +37,8 @@ function flap() {
 function onGround() {
   if (isColliding(bird, ground)) {
     stopGravity();
+    stopMovement();
+    disableClick();
   }
 }
 
