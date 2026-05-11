@@ -1,9 +1,8 @@
 import { bird, isColliding } from "./bird";
 const planeX = document.querySelector(".plane-x");
 const pipeColumn = document.querySelector(".pipe-column");
-
+const wrapper = document.querySelector(".game-box");
 let velocityX = 3;
-let pipeInterval;
 
 function startMovement() {
   velocityX = 3;
@@ -24,8 +23,10 @@ function Pipe() {
   pipeBottom.classList.add("pipe-bottom");
   pipeTop.style.height = `${Math.floor(Math.random() * 81) + 10}%`;
   column.append(pipeTop, pipeBottom);
-  column.style.left = `${screen.width}px`;
 
+  column.style.left = window.getComputedStyle(wrapper).width;
+
+  //Pipes move constantly based on the velocity
   const moveColumnLeft = setInterval(() => {
     birdPipeCollision(bird, pipeTop, pipeBottom);
     let pos = parseInt(window.getComputedStyle(column).left);
@@ -40,7 +41,7 @@ function Pipe() {
     gapInterval = setInterval(() => {
       if (triggered == 0) {
         let pos = parseInt(window.getComputedStyle(column).left);
-        if (screen.width - pos >= 300) {
+        if (parseInt(window.getComputedStyle(wrapper).width) - pos >= 300) {
           triggered = 1;
           makePipe();
         }

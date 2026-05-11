@@ -8,6 +8,12 @@ body{
     height: 100vh;
     background-color: skyblue;
 }
+.game-box{
+    height: 100%;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
 .plane-x{
     width: 100vw;
     height: 90%;
@@ -21,7 +27,7 @@ body{
 .plane-y{
     width: 50px;
     height: 100%;
-    left: 300px;
+    left: 250px;
     position: absolute;
     overflow: none;
 }
