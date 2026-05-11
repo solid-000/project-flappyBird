@@ -2,7 +2,6 @@ const bird = document.querySelector(".bird");
 const planeY = document.querySelector(".plane-y");
 const planeX = document.querySelector(".plane-x");
 const ground = document.querySelector(".ground");
-// const dummy = document.querySelector(".dummy");
 
 let velocityY = 0;
 let pos = 0;
@@ -28,10 +27,6 @@ function moveBirdDown() {
   bird.style.top = `${pos}px`;
 }
 
-let click = planeX.addEventListener("click", () => {
-  flap();
-});
-
 function flap() {
   velocityY = -12;
 }
@@ -53,6 +48,17 @@ function onGround() {
     stopGravity();
   }
 }
+
+const mouseClick = document
+  .querySelector("body")
+  .addEventListener("click", () => {
+    flap();
+  });
+// document.addEventListener("keydown", (event) => {
+//   if (event.code === "Space") {
+//     flap();
+//   }
+// });
 
 startGravity();
 export { startGravity, bird, isColliding, moveBirdDown };

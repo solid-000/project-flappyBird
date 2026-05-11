@@ -4,6 +4,11 @@ import { startGravity, moveBirdDown } from "./modules/bird";
 import { startMovement } from "./modules/pipes";
 
 let gameInterval;
+let score = 0;
+
+function scoreUp() {
+  score++;
+}
 
 function startGameLoop() {
   gameInterval = setInterval(() => {
@@ -12,3 +17,6 @@ function startGameLoop() {
 }
 
 startGameLoop();
+startMovement();
+
+export { scoreUp };
