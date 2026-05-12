@@ -1,3 +1,7 @@
+import { stopMovement } from "./pipes";
+import { stopGravity } from "./bird";
+import { reset, stopGameLoop } from "..";
+
 const scoreBoard = document.querySelector(".score-board");
 
 //Score functions
@@ -22,7 +26,7 @@ function isColliding(div1, div2) {
 }
 
 //Click functions
-let clickEnabled = 1;
+let clickEnabled = 0;
 function enableClick() {
   clickEnabled = 1;
 }
@@ -30,4 +34,22 @@ function disableClick() {
   clickEnabled = 0;
 }
 
-export { isColliding, scoreUp, score, clickEnabled, enableClick, disableClick };
+function gameOver() {
+  stopGameLoop();
+  stopGravity();
+  stopMovement();
+  disableClick();
+  // setTimeout(() => {
+  //   reset();
+  // }, 2000);
+}
+
+export {
+  isColliding,
+  scoreUp,
+  score,
+  clickEnabled,
+  enableClick,
+  disableClick,
+  gameOver,
+};

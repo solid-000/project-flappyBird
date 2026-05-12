@@ -1,4 +1,4 @@
-import { isColliding, disableClick } from "./common";
+import { isColliding, disableClick, gameOver } from "./common";
 import { stopMovement } from "./pipes";
 
 const bird = document.querySelector(".bird");
@@ -23,6 +23,7 @@ function stopGravity() {
 function moveBird() {
   onGround();
   pos = parseInt(window.getComputedStyle(bird).top);
+  //Limits bird from flying off screen
   if (pos <= 0) {
     pos = 0;
   }
@@ -36,11 +37,8 @@ function flap() {
 
 function onGround() {
   if (isColliding(bird, ground)) {
-    stopGravity();
-    stopMovement();
-    disableClick();
+    gameOver();
   }
 }
 
-startGravity();
-export { startGravity, bird, moveBird, flap };
+export { startGravity, stopGravity, bird, moveBird, flap };

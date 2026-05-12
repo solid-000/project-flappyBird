@@ -61,7 +61,7 @@ body{
     background-color: red;
     position: absolute;
     z-index: 2;
-    /* transition: top 0.1s; */
+    top: 40%;
 }
 .score-board{
     background-color: white;
@@ -75,4 +75,9 @@ body{
     font-size: 3rem;
     text-align: center;
     transition: top 0.7s;
+}
+.start-game{
+    position: absolute;
+    z-index: 4;
+
 }

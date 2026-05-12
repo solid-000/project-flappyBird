@@ -1,8 +1,14 @@
 "use strict";
 import "./styles.css";
-import { startGravity, moveBird, flap } from "./modules/bird";
-import { startMovement } from "./modules/pipes";
-import { clickEnabled } from "./modules/common";
+import {
+  startGravity,
+  moveBird,
+  flap,
+  bird,
+  stopGravity,
+} from "./modules/bird";
+import { startMovement, makePipe, stopMovement } from "./modules/pipes";
+import { clickEnabled, disableClick, enableClick } from "./modules/common";
 
 let gameInterval;
 
@@ -16,7 +22,36 @@ function startGameLoop() {
   gameInterval = setInterval(() => {
     moveBird();
   }, 25);
+  startGravity();
+  startMovement();
+}
+function stopGameLoop() {
+  clearInterval(gameInterval);
+  stopGravity();
+  stopMovement();
 }
 
-startGameLoop();
-startMovement();
+function startGame() {
+  reset();
+  setTimeout(() => {
+    makePipe();
+    startGameLoop();
+    enableClick();
+  }, 1000);
+}
+
+function reset() {
+  disableClick();
+  stopGameLoop();
+  const pipes = document.querySelectorAll(".pipe-column");
+  pipes.forEach((pipe) => {
+    pipe.remove();
+  });
+  bird.style.top = "40%";
+}
+
+document.querySelector(".start-game").addEventListener("click", () => {
+  startGame();
+});
+
+export { reset, stopGameLoop };

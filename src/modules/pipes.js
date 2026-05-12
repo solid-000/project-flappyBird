@@ -91,5 +91,4 @@ function arePipesLeftOfPlaneY(pipes, plane) {
   );
 }
 
-makePipe();
-export { startMovement, stopMovement };
+export { startMovement, stopMovement, makePipe };
