@@ -11,6 +11,7 @@ import { startMovement, makePipe, stopMovement } from "./modules/pipes";
 import { clickEnabled, disableClick, enableClick } from "./modules/common";
 
 let gameInterval;
+const gameStartButton = document.querySelector(".start-game");
 
 document.querySelector("body").addEventListener("click", () => {
   if (clickEnabled) {
@@ -33,11 +34,9 @@ function stopGameLoop() {
 
 function startGame() {
   reset();
-  setTimeout(() => {
-    makePipe();
-    startGameLoop();
-    enableClick();
-  }, 1000);
+  makePipe();
+  startGameLoop();
+  enableClick();
 }
 
 function reset() {
@@ -50,8 +49,9 @@ function reset() {
   bird.style.top = "40%";
 }
 
-document.querySelector(".start-game").addEventListener("click", () => {
+gameStartButton.addEventListener("click", () => {
+  gameStartButton.remove();
   startGame();
 });
 
-export { reset, stopGameLoop };
+export { reset, stopGameLoop, gameStartButton };
